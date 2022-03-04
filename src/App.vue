@@ -28,7 +28,7 @@ export default {
     box-shadow: inset 0 0 6px rgb(0 0 0 / 20%);
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Comic Sans MS, Helvetica, Arial, sans-serif;
   height: 100%;
 }
 html,body{

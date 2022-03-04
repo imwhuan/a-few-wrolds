@@ -1,9 +1,9 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger" style="height:100%">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+    <a-layout-sider v-model:collapsed="collapsed" style="background-color:#fff" :trigger="null" collapsible>
       <div class="logo" @click="Info">Love You</div>
       <div class="scrollbar" style="height: calc(100% - 48px);">
-        <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @click="ClickMenuItem">
+        <a-menu v-model:selectedKeys="selectedKeys" mode="inline" @click="ClickMenuItem">
         <a-menu-item key="/">
           <user-outlined />
           <span>主页</span>
@@ -37,16 +37,17 @@
           <head-bread></head-bread>
           </div>
       </a-layout-header>
-      <a-layout-content class="scrollbar"
-        :style="{ margin: '64px 16px 24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
-      >
+      <a-layout-content class="scrollbar" style="margin-top: 48px;minHeight: 280px">
+      <a-layout>
       <router-view/>
-      </a-layout-content>
       <a-layout-footer style="text-align: center">
         <a-tag color="green">imwhuan</a-tag>
         <br/>
         Ant Design Vue ©2022 Created by Huan
       </a-layout-footer>
+
+      </a-layout>
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
@@ -109,6 +110,7 @@ export default defineComponent({
   transition: all .5s;
   cursor: pointer;
   user-select: none;
+  overflow: hidden;
 }
 #components-layout-demo-custom-trigger .logo:hover {
     transform: scale(1.1);
