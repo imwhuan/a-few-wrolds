@@ -1,47 +1,35 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger" style="height:100%">
-    <a-layout-sider v-model:collapsed="collapsed" style="background-color:#fff" :trigger="null" collapsible>
+    
+    <a-layout-sider v-model:collapsed="collapsed" style="background-color:#fff" :trigger="null" collapsible v-if="width>=768">
       <div class="logo" @click="Info">Love You</div>
-      <div class="scrollbar" style="height: calc(100% - 48px);">
-        <a-menu v-model:selectedKeys="selectedKeys" mode="inline" @click="ClickMenuItem">
-        <a-menu-item key="/">
-          <user-outlined />
-          <span>主页</span>
-        </a-menu-item>
-        <a-menu-item key="about">
-          <video-camera-outlined />
-          <span>关于</span>
-        </a-menu-item>
-        <a-sub-menu key="about">
-          <template #title>
-            <span>
-              <upload-outlined />
-              <span>其他</span>
-            </span>
-          </template>
-          <a-menu-item key="about2">关于2</a-menu-item>
-        </a-sub-menu>
-      </a-menu>
-      </div>
-      
+      <side-menu></side-menu>
     </a-layout-sider>
+    <template v-else>
+      <a-drawer
+        v-model:visible="collapsed"
+        :closable="false"
+        placement="left"
+      >
+      <template #title>
+         <div class="logo" @click="Info">Love You</div>
+      </template>
+      <side-menu></side-menu>
+      </a-drawer>
+    </template>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0;position:fixed;width:100%;height: 48px;line-height: 48px;">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
+        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)"/>
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
-          <div style="display:inline-block">
+        <div style="display:inline-block">
           <head-bread></head-bread>
-          </div>
+        </div>
       </a-layout-header>
       <a-layout-content class="scrollbar" style="margin-top: 48px;minHeight: 280px">
       <a-layout>
       <router-view/>
       <a-layout-footer style="text-align: center">
-        <a-tag color="green">imwhuan</a-tag>
+        <a-tag color="green" @click="bigscreen=!bigscreen">imwhuan</a-tag>
         <br/>
         Ant Design Vue ©2022 Created by Huan
       </a-layout-footer>
@@ -52,35 +40,31 @@
   </a-layout>
 </template>
 <script>
-import { UserOutlined, VideoCameraOutlined, UploadOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 import HeadBread from '../components/HeaderBread.vue'
+import SideMenu from './menu/SideMenu.vue'
+import useWindowResize from '../hooks/winsize'
 
 export default defineComponent({
   components: {
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    HeadBread
+    HeadBread,
+    SideMenu
   },
-
   setup() {
+    const { width, height } = useWindowResize();
     return {
       selectedKeys: ref(['/']),
       collapsed: ref(false),
+      bigscreen: ref(false),
+      width,
+      height
     };
   },
   methods:{
-    ClickMenuItem(e){
-      const path=e.keyPath.join('/')
-      this.$router.push(path)
-      // if(this.$route.path!==path){
-      //   this.$router.push(path)
-      // }
-    },
     Info(){
       message.info('💕好喜欢你丫🤟');
     }
@@ -99,7 +83,9 @@ export default defineComponent({
 #components-layout-demo-custom-trigger .trigger:hover {
   color: #1890ff;
 }
-
+.smallside{
+  background-color: rgba(139, 138, 138, 0.315);
+}
 #components-layout-demo-custom-trigger .logo {
   height: 24px;
   background: rgb(65 184 131);
@@ -114,7 +100,7 @@ export default defineComponent({
 }
 #components-layout-demo-custom-trigger .logo:hover {
     transform: scale(1.1);
-}
+} 
 
 .site-layout .site-layout-background {
   background: #fff;
