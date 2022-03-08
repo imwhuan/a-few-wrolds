@@ -29,7 +29,7 @@
       <a-layout>
       <router-view/>
       <a-layout-footer style="text-align: center">
-        <a-tag color="green" @click="bigscreen=!bigscreen">imwhuan</a-tag>
+        <a-tag color="green">imwhuan</a-tag>
         <br/>
         Ant Design Vue ©2022 Created by Huan
       </a-layout-footer>
@@ -59,7 +59,6 @@ export default defineComponent({
     return {
       selectedKeys: ref(['/']),
       collapsed: ref(false),
-      bigscreen: ref(false),
       width,
       height
     };

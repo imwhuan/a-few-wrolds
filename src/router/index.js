@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import About2 from '../views/About2.vue'
+import TestEditor from '../views/editor/TestEditor.vue'
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     children:[
       {path:'/about2',name:'关于我',component:About2}
     ]
+  },
+  {
+    path:'/editor',
+    name:'编辑器',
+    component:TestEditor
   }
 ]
 

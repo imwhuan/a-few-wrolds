@@ -9,6 +9,10 @@
           <video-camera-outlined />
           <span>关于</span>
         </a-menu-item>
+        <a-menu-item key="editor">
+          <video-camera-outlined />
+          <span>编辑器</span>
+        </a-menu-item>
         <a-sub-menu key="about">
           <template #title>
             <span>
