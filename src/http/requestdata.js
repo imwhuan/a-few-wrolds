@@ -1,10 +1,5 @@
-import { ImgRequest,BaseRequest } from "./request";
-import baseserve from "./baseserve";
+import { GetImageByName } from "./ImageServer";
+import {Login,GetSecretData,GetPublicData} from './ShareMeServer'
 
-function GetImageByName(name){
-    ImgRequest({data:name})
-}
-function GetWeather(){
-    return BaseRequest().get(baseserve.funcs.login)
-}
-export {GetImageByName,GetWeather}
+
+export {GetImageByName,Login,GetSecretData,GetPublicData}

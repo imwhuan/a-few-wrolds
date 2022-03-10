@@ -2,7 +2,7 @@
   <div class="gutter-example">
     <a-row :gutter="[16,16]" justify="center">
       <a-col class="gutter-row" flex="100px">
-         <a-avatar @click="mygetweather" :size="64" :src="headimg" />
+         <a-avatar :size="64" :src="headimg" />
       </a-col>
       <a-col class="gutter-row" flex="auto">
         <a-row :gutter="[16,8]" justify="space-between">
@@ -41,21 +41,10 @@
 </template>
 
 <script>
-import { GetWeather } from '../../http/requestdata'
-import {ImageServe} from '../../http/imageserve'
 export default {
   data(){
     return {
-      headimg:ImageServe.url+ImageServe.head
-    }
-  },
-  methods:{
-    mygetweather(){
-      GetWeather().then(res=>{
-        console.log("getweather结果",res)
-      }).catch(err=>{
-        console.log("错误",err)
-      })
+      headimg:"http://172.20.156.234/few10.jpeg"
     }
   }
 }

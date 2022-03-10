@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import About2 from '../views/About2.vue'
 import TestEditor from '../views/editor/TestEditor.vue'
+import TestHttp from '../Test/TestHttp.vue'
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path:'/editor',
     name:'编辑器',
     component:TestEditor
+  },
+  {
+    path:'/testhttp',
+    name:'测试http',
+    component:TestHttp
   }
 ]
 
