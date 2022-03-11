@@ -1,6 +1,6 @@
 import axios from 'axios';
 const ServerConfig={
-    BaseUrl:"http://172.20.156.234/",
+    BaseUrl:"http://172.30.112.22/",
     logo:"few10.gif",
     head:"few10.jpeg"
 }

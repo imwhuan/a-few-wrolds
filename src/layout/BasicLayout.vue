@@ -9,7 +9,9 @@
       <a-drawer
         v-model:visible="collapsed"
         :closable="false"
+        width="70%"
         placement="left"
+        :body-style="{padding:0}"
       >
       <template #title>
          <div class="logo" @click="Info">Love You</div>
@@ -18,14 +20,22 @@
       </a-drawer>
     </template>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0;position:fixed;width:100%;height: 48px;line-height: 48px;">
-        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)"/>
-        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
-        <div style="display:inline-block">
-          <head-bread></head-bread>
-        </div>
+      <a-layout-header style="background: #fff; padding: 0;height: 48px;line-height: 48px;">
+        <a-row type="flex" justify="space-between" align="bottom">
+          <a-col>
+            <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)"/>
+            <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
+            <div style="display:inline-block">
+              <head-bread></head-bread>
+            </div>
+          </a-col>
+          <a-col :flex="1" style="text-align: end;">
+            <top-right-menu :mini="width<768" @switchLang="$emit('switchLang',$event)"></top-right-menu>
+          </a-col>
+        </a-row>
+        
       </a-layout-header>
-      <a-layout-content class="scrollbar" style="margin-top: 48px;minHeight: 280px">
+      <a-layout-content class="scrollbar" style="minHeight: 280px">
       <a-layout>
       <router-view/>
       <a-layout-footer style="text-align: center">
@@ -45,14 +55,25 @@ import { message } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 import HeadBread from '../components/HeaderBread.vue'
 import SideMenu from './menu/SideMenu.vue'
+import TopRightMenu from './menu/TopRightMenu.vue'
 import useWindowResize from '../hooks/winsize'
 
 export default defineComponent({
+  emits:{
+      switchLang:(lang)=>{
+          if(lang){
+              return true
+          }else{
+              return false
+          }
+      }
+    },
   components: {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     HeadBread,
-    SideMenu
+    SideMenu,
+    TopRightMenu
   },
   setup() {
     const { width, height } = useWindowResize();
@@ -66,7 +87,7 @@ export default defineComponent({
   methods:{
     Info(){
       message.info('💕好喜欢你丫🤟');
-    }
+    },
   }
 });
 </script>

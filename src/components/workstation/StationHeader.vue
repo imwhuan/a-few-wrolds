@@ -44,7 +44,7 @@
 export default {
   data(){
     return {
-      headimg:"http://172.20.156.234/few10.jpeg"
+      headimg:"http://172.30.112.22/few10.jpeg"
     }
   }
 }
