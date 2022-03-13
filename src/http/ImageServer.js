@@ -2,7 +2,8 @@ import axios from 'axios';
 const ServerConfig={
     BaseUrl:"http://172.30.112.22/",
     logo:"few10.gif",
-    head:"few10.jpeg"
+    head:"few10.jpeg",
+    bgindex:"few50.jpeg"
 }
 const ImageServe = axios.create({
     baseURL: ServerConfig.BaseUrl,
@@ -14,4 +15,4 @@ function GetImageByName(name){
 function GetLogoImg(){
     return ImageServe.get(ServerConfig.logo)
 }
-export {ImageServe,GetImageByName,GetLogoImg}
+export {ImageServe,GetImageByName,GetLogoImg,ServerConfig}

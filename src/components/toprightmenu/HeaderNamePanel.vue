@@ -10,7 +10,7 @@
             <a href="javascript:;">个人中心</a>
             </a-menu-item>
             <a-menu-item>
-            <a href="javascript:;">切换账号</a>
+                <router-link to="/login">退出系统</router-link>
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item>

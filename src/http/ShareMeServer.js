@@ -4,6 +4,7 @@ import { ResponseModel } from './requestmodel';
 
 const ServerConfig={
     BaseUrl:"https://localhost:7018/",
+    FuncRegister:"Account/Register",
     FuncLogin:"Account/Login",
     FuncGetPublicData:"Account/GetPublicData",
     FuncGetSecretData:"Account/GetSecretData"
@@ -11,7 +12,7 @@ const ServerConfig={
 
 const ShareMeServer = axios.create({
     baseURL: ServerConfig.BaseUrl,
-    timeout: 5000
+    timeout: 10000
     // 'transformRequest' 允许在向服务器发送前，修改请求数据
     // transformRequest: [function (data) {
     //     // 对 data 做序列化处理
@@ -70,21 +71,24 @@ ShareMeServer.interceptors.response.use(res => {
         console.log("响应拦截错误完整信息=>",err)
         //throw err;
         const res =new ResponseModel()
-        res.Success=false;
-        res.Message=err.message
+        res.success=false;
+        res.message=err.message
         return Promise.reject(res)
     }
 })
 
 async function Login(name,pwd){
     try {
-        const res = await ShareMeServer.post(ServerConfig.LoginFunc, { name: name, password: pwd });
+        const res = await ShareMeServer.post(ServerConfig.FuncLogin, { Name: name, Password: pwd });
         sessionStorage.setItem("token",res.data)
         return await Promise.resolve(res);
     } catch (err) {
         return await Promise.reject(err);
     }
     //return BaseRequest().post(baseserve.funcs.login,{name:name,password:pwd})
+}
+function Register(data){
+    return ShareMeServer.post(ServerConfig.FuncRegister,data)
 }
 function GetSecretData(){
     return ShareMeServer.get(ServerConfig.FuncGetSecretData)
@@ -93,4 +97,4 @@ function GetPublicData(){
     return ShareMeServer.get(ServerConfig.FuncGetPublicData)
 }
 
-export {ShareMeServer,Login,GetSecretData,GetPublicData}
+export {ShareMeServer,Login,GetSecretData,GetPublicData,Register}
