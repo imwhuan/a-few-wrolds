@@ -8,16 +8,18 @@ import TestHttp from '../Test/TestHttp.vue'
 import LoginIndex from '../views/login/LoginIndex.vue'
 import LayoutWithLang from '../layout/LayoutWithLang.vue'
 import NotFound from '../views/NotFound.vue'
+import Result403 from '../views/Result403.vue'
 
 const routes = [
   {
     path: '/',
+    name:'index',
     component: IndexPage,
     alias: '/share'
   },
   {
     path: '/share',
-    name: '首页',
+    name: 'share',
     component: IndexPage
   },
   {
@@ -63,6 +65,9 @@ const routes = [
       }
     ]
   },
+  {
+    path:'/forbid',name:'forbid',component:Result403
+  },
   {path:'/:pathMatch(.*)',name:'notfound',component:NotFound}
 ]
 
@@ -70,5 +75,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-
+const pubroutes=['index','share','登录','forbid','notfound']
+router.beforeEach((to)=>{
+  if(pubroutes.includes(to.name)){
+    return true
+  }
+  if(window.sessionStorage.getItem('token')){
+    return true;
+  }else{
+    return {name: 'forbid',replace: true}
+  }
+})
 export default router

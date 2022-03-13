@@ -1,8 +1,8 @@
 <template>
-    <a-button type="dashed" shape="circle" v-show="!full" @click="launchFullscreen" title="全屏">
+    <a-button type="text" shape="circle" v-show="!full" @click="launchFullscreen" title="全屏">
         <template #icon><expand-outlined /></template>
     </a-button>
-    <a-button type="dashed" shape="circle" v-show="full" @click="exitFullscreen" title="关闭全屏">
+    <a-button type="text" shape="circle" v-show="full" @click="exitFullscreen" title="关闭全屏">
         <template #icon><compress-outlined /></template>
     </a-button>
   <!-- <expand-outlined v-show="!full" @click="full=!full"/>

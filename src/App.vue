@@ -1,10 +1,21 @@
 <template>
-<router-view/>
+<div style="width:100%;height:100%;" @click="mainClick($event)">
+  <mouse-special ref="mousePlugin"></mouse-special>
+  <router-view/>
+</div>
+
 </template>
 <script>
-
+import mouseSpecial from './components/plugins/mouseClick.vue'
 export default {
-
+  components:{
+    mouseSpecial
+  },
+  methods:{
+    mainClick(ev){
+      this.$refs.mousePlugin.AfterClick(ev)
+    }
+  }
 }
 </script>
 <style>

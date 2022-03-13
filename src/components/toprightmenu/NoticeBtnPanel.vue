@@ -4,7 +4,7 @@
             <p>Content</p>
             <p>Content</p>
         </template>
-        <a-button type="dashed" shape="circle">
+        <a-button type="text" shape="circle">
             <template #icon><bell-outlined /></template>
         </a-button>
     </a-popover>

@@ -3,7 +3,9 @@
     <div class="loginbgpanel" :style="{ backgroundImage: 'url('+bgimg+')'}"></div>
     <a-row type="flex" justify="center" align="middle" style="height:100%;">
       <a-col :xs="20" :sm="14" :md="10" :lg="7" class="formpanel">
-        <component :is="form"></component>
+        <transition name="fade"  mode="out-in">
+          <component :is="form"></component>
+        </transition>
         <a-row type="flex" justify="space-between">
           <a-col>
             <a-button>手机登录</a-button>
@@ -63,6 +65,13 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
 .loginpage{
   height: 100%;
 }
@@ -71,7 +80,7 @@ export default {
   height: 100%;
   position: absolute;
   background-position: center;
-  filter: blur(3px);
+  filter: blur(2px);
   background-repeat: no-repeat;
   background-size: cover;
 }

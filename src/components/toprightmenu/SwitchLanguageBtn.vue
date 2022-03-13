@@ -1,6 +1,6 @@
 <template>
   <a-dropdown>
-        <a-button type="dashed" shape="circle" title="设置">
+        <a-button type="text" shape="circle" title="设置">
             <template #icon><translation-outlined /></template>
         </a-button>
         <template #overlay>

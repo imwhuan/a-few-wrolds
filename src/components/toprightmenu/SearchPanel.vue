@@ -1,5 +1,5 @@
 <template>
-    <a-button type="dashed" shape="circle" @click="showModal" title="搜索">
+    <a-button type="text" shape="circle" @click="showModal" title="搜索">
         <template #icon><SearchOutlined /></template>
     </a-button>
     <a-modal v-model:visible="visible" title="全局搜索" @ok="handleOk">
