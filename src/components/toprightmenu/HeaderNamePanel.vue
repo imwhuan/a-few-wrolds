@@ -1,7 +1,7 @@
 <template>
     <a-dropdown>
         <a-space style="cursor: pointer;">
-            <a-avatar alt="👻" src="http://172.30.112.22/few10.jpeg" />
+            <a-avatar alt="👻" :src="headerimg" />
             ImwHuan
         </a-space>
         <template #overlay>
@@ -10,7 +10,8 @@
             <a href="javascript:;">个人中心</a>
             </a-menu-item>
             <a-menu-item>
-                <router-link to="/login">退出系统</router-link>
+                <a-button type="text" @click="visible=true">退出系统</a-button>
+                <!-- <router-link to="/login">退出系统</router-link> -->
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item>
@@ -19,11 +20,71 @@
         </a-menu>
         </template>
     </a-dropdown>
+    <a-modal
+      v-model:visible="visible"
+      title="提醒"
+      ok-text="确认"
+      cancel-text="取消"
+        :confirm-loading="confirmLoading"
+      @ok="handleOk"
+    >
+      <p>{{modalText}}</p>
+    </a-modal>
 </template>
 
 <script>
+import { ref } from 'vue';
+import {ServerConfig} from '../../http/ImageServer'
+import {GetSecretData} from '../../http/ShareMeServer'
 export default {
+    setup() {
+    const modalText = ref('确认退出当前账号？（当前未保存数据可能会丢失）');
+    const visible = ref(false);
+    const confirmLoading = ref(false);
 
+    const headerimg=ServerConfig.BaseUrl+ServerConfig.head
+    const showModal = () => {
+      visible.value = true;
+    };
+
+    //const router=this.$router;
+    // const handleOk = () => {
+    //   modalText.value = '正在退出当前账号...';
+    //   confirmLoading.value = true;
+    //   GetSecretData().then(()=>{
+    //     confirmLoading.value = false;
+    //     visible.value = false;
+    //     //window.sessionStorage.clear();
+    //     router.go(0)
+    //   }).catch(err=>{
+    //     confirmLoading.value = false;
+    //       console.log("退出失败",err)
+    //   })
+    // };
+    return {
+        headerimg,
+      modalText,
+      visible,
+      confirmLoading,
+      showModal,
+    };
+  },
+    methods:{
+        handleOk(){
+            this.modalText = '正在退出当前账号...';
+      this.confirmLoading = true;
+      GetSecretData().then(()=>{
+          //console.log("退出成功",res)
+        this.confirmLoading = false;
+        this.visible = false;
+        window.sessionStorage.clear();
+        this.$router.go(0)
+      }).catch(err=>{
+        this.confirmLoading = false;
+          console.log("退出失败",err)
+      })
+        }
+    }
 }
 </script>
 

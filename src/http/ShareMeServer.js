@@ -3,7 +3,7 @@ import { notification } from 'ant-design-vue'
 import { ResponseModel } from './requestmodel';
 
 const ServerConfig={
-    BaseUrl:"https://localhost:7018/",
+    BaseUrl:process.env.VUE_APP_SERVER,
     FuncRegister:"Account/Register",
     FuncLogin:"Account/Login",
     FuncGetPublicData:"Account/GetPublicData",
@@ -11,7 +11,7 @@ const ServerConfig={
 }
 
 const ShareMeServer = axios.create({
-    baseURL: ServerConfig.BaseUrl,
+    baseURL:ServerConfig.BaseUrl,
     timeout: 10000
     // 'transformRequest' 允许在向服务器发送前，修改请求数据
     // transformRequest: [function (data) {
@@ -96,5 +96,7 @@ function GetSecretData(){
 function GetPublicData(){
     return ShareMeServer.get(ServerConfig.FuncGetPublicData)
 }
+function SignOut(){
 
-export {ShareMeServer,Login,GetSecretData,GetPublicData,Register}
+}
+export {ShareMeServer,Login,GetSecretData,GetPublicData,Register,SignOut}

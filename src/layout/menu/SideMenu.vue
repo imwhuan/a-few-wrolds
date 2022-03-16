@@ -1,7 +1,7 @@
 <template>
       <div class="scrollbar" style="height: calc(100% - 48px);">
         <a-menu v-model:selectedKeys="selectedKeys" mode="inline" @click="ClickMenuItem">
-        <a-menu-item key="/">
+        <a-menu-item key="home">
           <user-outlined />
           <span>主页</span>
         </a-menu-item>
@@ -46,8 +46,7 @@ export default {
     },
     methods:{
         ClickMenuItem(e){
-        const path=e.keyPath.join('/')
-        this.$router.push(path)
+        this.$router.push({name:e.key})
         // if(this.$route.path!==path){
         //   this.$router.push(path)
         // }

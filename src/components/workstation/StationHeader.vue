@@ -41,10 +41,11 @@
 </template>
 
 <script>
+import {ServerConfig} from '../../http/ImageServer'
 export default {
   data(){
     return {
-      headimg:"http://172.30.112.22/few10.jpeg"
+      headimg:ServerConfig.BaseUrl+ServerConfig.head
     }
   }
 }

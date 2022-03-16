@@ -19,6 +19,9 @@ export default defineComponent({
             router
         }
     },
+    mounted(){
+      console.log("全局变量",process.env)
+    },
     methods:{
         toLogin(){
             this.router.push('/login')

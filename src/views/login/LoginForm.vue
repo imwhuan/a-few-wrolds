@@ -77,7 +77,7 @@ export default defineComponent({
         logining.value=false
         message.success({ content: "登录成功！,即将跳转至首页...",key: msgkey })
         setTimeout(()=>{
-          router.replace("/main")
+          router.replace({name:'home'})
         },1000)
       }).catch(err=>{
         logining.value=false

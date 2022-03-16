@@ -1,13 +1,13 @@
 import axios from 'axios';
 const ServerConfig={
-    BaseUrl:"http://172.30.112.22/",
+    BaseUrl:process.env.VUE_APP_IMAGES,
     logo:"few10.gif",
     head:"few10.jpeg",
     bgindex:"few50.jpeg"
 }
 const ImageServe = axios.create({
     baseURL: ServerConfig.BaseUrl,
-    timeout: 5000,
+    timeout: 10000,
 })
 function GetImageByName(name){
     return ImageServe.get(name)
