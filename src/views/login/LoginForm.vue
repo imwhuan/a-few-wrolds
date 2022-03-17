@@ -54,6 +54,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { Login } from '../../http/requestdata'
 import { useRouter} from 'vue-router'
+import {env} from 'process'
 export default defineComponent({
   components: {
     UserOutlined,
@@ -61,6 +62,7 @@ export default defineComponent({
   },
 
   setup() {
+      console.log("全局变量",process.env,env,env.ImgServer)
     const router=useRouter();
     const formState = reactive({
       username: '',
@@ -74,6 +76,7 @@ export default defineComponent({
       const msgkey='msgkey'
       message.loading({ content: '正在登录...',key: msgkey,duration:0 });
       Login(formState.username,formState.password).then(()=>{
+        sessionStorage.setItem("username",formState.username)
         logining.value=false
         message.success({ content: "登录成功！,即将跳转至首页...",key: msgkey })
         setTimeout(()=>{

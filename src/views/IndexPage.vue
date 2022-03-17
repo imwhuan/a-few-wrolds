@@ -1,5 +1,5 @@
 <template>
-  <a-result title="旅行者，欢迎使用ShareMe系统!">
+  <a-result :title="welcome_world">
     <template #icon>
       <smile-twoTone />
     </template>
@@ -11,20 +11,26 @@
 <script>
 import { SmileTwoTone } from '@ant-design/icons-vue';
 import { defineComponent } from 'vue';
-import { useRouter} from 'vue-router'
+import {GetSysSetting} from '../http/requestdata'
 export default defineComponent({
-    setup(){
-        const router=useRouter();
-        return {
-            router
-        }
+    data(){
+      return {
+        welcome_world:sessionStorage.getItem("welcome")??"*/+-"
+      }
     },
     mounted(){
-      console.log("全局变量",process.env)
+      if(sessionStorage.getItem("welcome")==null){
+        GetSysSetting('welCome').then(res=>{
+          this.welcome_world=res.data.title;
+          sessionStorage.setItem("welcome",res.data.title)
+        }).catch(err=>{
+          console.log(err)
+        })
+      }
     },
     methods:{
         toLogin(){
-            this.router.push('/login')
+            this.$router.push('/login')
         }
     },
   components: {

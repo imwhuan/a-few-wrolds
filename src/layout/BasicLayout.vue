@@ -2,7 +2,7 @@
   <a-layout id="components-layout-demo-custom-trigger" style="height:100%">
     
     <a-layout-sider v-model:collapsed="collapsed" style="background-color:#fff" :trigger="null" collapsible v-if="width>=768">
-      <div class="logo" @click="Info">Love You</div>
+      <div class="logo" @click="Info">{{title}}</div>
       <side-menu></side-menu>
     </a-layout-sider>
     <template v-else>
@@ -14,7 +14,7 @@
         :body-style="{padding:0}"
       >
       <template #title>
-         <div class="logo" @click="Info">Love You</div>
+         <div class="logo" @click="Info">{{title}}</div>
       </template>
       <side-menu></side-menu>
       </a-drawer>
@@ -57,6 +57,7 @@ import HeadBread from '../components/HeaderBread.vue'
 import SideMenu from './menu/SideMenu.vue'
 import TopRightMenu from './menu/TopRightMenu.vue'
 import useWindowResize from '../hooks/winsize'
+import sysconfig from '../sysconfig'
 
 export default defineComponent({
   emits:{
@@ -81,7 +82,8 @@ export default defineComponent({
       selectedKeys: ref(['/']),
       collapsed: ref(false),
       width,
-      height
+      height,
+      title:sysconfig.title
     };
   },
   methods:{

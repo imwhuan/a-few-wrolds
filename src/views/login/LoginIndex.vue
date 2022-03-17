@@ -47,7 +47,8 @@
 <script>
 import LoginForm from './LoginForm.vue'
 import RegisterForm from './RegisterForm.vue'
-import {ServerConfig} from '../../http/ImageServer'
+import {GetImageUrl} from '../../http/ShareMeServer'
+import sysConfig from '../../sysconfig'
 import {
   GithubOutlined,TwitterOutlined,WechatOutlined,QqOutlined,DingdingOutlined,WeiboCircleOutlined} from '@ant-design/icons-vue';
 export default {
@@ -58,7 +59,8 @@ export default {
     data(){
       return {
         form:'LoginForm',
-        bgimg:ServerConfig.BaseUrl+ServerConfig.bgindex
+        bgimg:GetImageUrl("bglogin"),
+        title:sysConfig.title
       }
     }
 }

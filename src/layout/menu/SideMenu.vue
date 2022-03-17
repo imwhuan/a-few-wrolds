@@ -10,22 +10,13 @@
           <span>关于</span>
         </a-menu-item>
         <a-menu-item key="editor">
-          <video-camera-outlined />
+          <upload-outlined />
           <span>编辑器</span>
         </a-menu-item>
         <a-menu-item key="testhttp">
           <video-camera-outlined />
           <span>Http请求</span>
         </a-menu-item>
-        <a-sub-menu key="about">
-          <template #title>
-            <span>
-              <upload-outlined />
-              <span>其他</span>
-            </span>
-          </template>
-          <a-menu-item key="about2">关于2</a-menu-item>
-        </a-sub-menu>
       </a-menu>
       </div>
 </template>

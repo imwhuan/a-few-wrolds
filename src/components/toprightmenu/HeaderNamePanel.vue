@@ -2,7 +2,7 @@
     <a-dropdown>
         <a-space style="cursor: pointer;">
             <a-avatar alt="👻" :src="headerimg" />
-            ImwHuan
+            {{username}}
         </a-space>
         <template #overlay>
         <a-menu>
@@ -34,34 +34,20 @@
 
 <script>
 import { ref } from 'vue';
-import {ServerConfig} from '../../http/ImageServer'
+import ImageServer from '../../http/ImageServer'
 import {GetSecretData} from '../../http/ShareMeServer'
 export default {
     setup() {
     const modalText = ref('确认退出当前账号？（当前未保存数据可能会丢失）');
     const visible = ref(false);
     const confirmLoading = ref(false);
-
-    const headerimg=ServerConfig.BaseUrl+ServerConfig.head
+    let username=sessionStorage.getItem("username")??"baby"
+    const headerimg=ImageServer.baseUrl+ImageServer.head
     const showModal = () => {
       visible.value = true;
     };
-
-    //const router=this.$router;
-    // const handleOk = () => {
-    //   modalText.value = '正在退出当前账号...';
-    //   confirmLoading.value = true;
-    //   GetSecretData().then(()=>{
-    //     confirmLoading.value = false;
-    //     visible.value = false;
-    //     //window.sessionStorage.clear();
-    //     router.go(0)
-    //   }).catch(err=>{
-    //     confirmLoading.value = false;
-    //       console.log("退出失败",err)
-    //   })
-    // };
     return {
+      username,
         headerimg,
       modalText,
       visible,

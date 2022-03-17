@@ -1,5 +1,4 @@
-import { GetImageByName } from "./ImageServer";
-import {Register,Login,GetSecretData,GetPublicData} from './ShareMeServer'
+import {Register,Login,GetSecretData,GetPublicData,GetSysSetting,GetImageUrl} from './ShareMeServer'
 
 
-export {GetImageByName,Register,Login,GetSecretData,GetPublicData}
+export {Register,Login,GetSecretData,GetPublicData,GetSysSetting,GetImageUrl}

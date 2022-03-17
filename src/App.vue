@@ -7,9 +7,30 @@
 </template>
 <script>
 import mouseSpecial from './components/plugins/mouseClick.vue'
+import {GetSysSetting} from './http/requestdata'
+import ImageServer from './http/ImageServer'
+import sysconfig from './sysconfig'
 export default {
   components:{
     mouseSpecial
+  },
+  mounted(){
+    console.log("启动！")
+    if(sessionStorage.getItem("webinfo")==null){
+      //请求信息
+      GetSysSetting('web').then(res=>{
+        sysconfig.title=res.data.title
+        ImageServer.baseUrl=res.data.imageServer
+        ImageServer.bgLogin=res.data.bgLogin;
+        // sessionStorage.setItem("webinfo",new Date)
+        // for(let i in res.data){
+        //   sessionStorage.setItem(i,res.data[i])
+        // }
+        //sessionStorage.setItem("webinfo",res.data)
+      }).catch(err=>{
+        console.log("系统初始化错误",err)
+      })
+    }
   },
   methods:{
     mainClick(ev){

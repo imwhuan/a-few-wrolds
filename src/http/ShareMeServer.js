@@ -4,10 +4,13 @@ import { ResponseModel } from './requestmodel';
 
 const ServerConfig={
     BaseUrl:process.env.VUE_APP_SERVER,
+    FuncSysSeetting:"WebSet/",
+    FuncWebInfo:"WebSet/GetWebInfo/web",
     FuncRegister:"Account/Register",
     FuncLogin:"Account/Login",
     FuncGetPublicData:"Account/GetPublicData",
-    FuncGetSecretData:"Account/GetSecretData"
+    FuncGetSecretData:"Account/GetSecretData",
+    GetImage:"File/Img/"
 }
 
 const ShareMeServer = axios.create({
@@ -96,7 +99,11 @@ function GetSecretData(){
 function GetPublicData(){
     return ShareMeServer.get(ServerConfig.FuncGetPublicData)
 }
-function SignOut(){
-
+function GetSysSetting(name){
+    return ShareMeServer.get(ServerConfig.FuncSysSeetting+name)
 }
-export {ShareMeServer,Login,GetSecretData,GetPublicData,Register,SignOut}
+function GetImageUrl(name){
+    return ServerConfig.BaseUrl+ServerConfig.GetImage+name
+}
+
+export {ShareMeServer,Login,GetSecretData,GetPublicData,Register,GetSysSetting,GetImageUrl}

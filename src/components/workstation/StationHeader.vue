@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import {ServerConfig} from '../../http/ImageServer'
+import ImageServer from '../../http/ImageServer'
 export default {
   data(){
     return {
-      headimg:ServerConfig.BaseUrl+ServerConfig.head
+      headimg:ImageServer.baseUrl+ImageServer.head
     }
   }
 }
